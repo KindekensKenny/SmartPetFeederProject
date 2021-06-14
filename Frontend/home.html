@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!--- <meta http-equiv="refresh" content="2"> -->
+    <title>Homepage</title>
+    <link rel="stylesheet" href="style/screen.css" />
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js" integrity="sha384-LzhRnpGmQP+lOvWruF/lgkcqD+WDVt9fU3H4BWmwP5u5LTmkUGafMcpZKNObVMLU" crossorigin="anonymous"></script>
+    <script src="/scripts/app.js"></script>
+  </head>
+  <body>
+  <div>
+    <header class="o-row o-row--md o-row--header">
+      <div class="o-container">
+        <div class="c-header">
+          <div class="c-header__logo">
+            <h1 class="c-logo">
+              <!--- <img class="c-logo__symbol" src="/style/img/SmartPetFeederIcon.png" alt="Icon"> -->
+            </h1>
+          </div>
+          <div class="c-header__nav c-header__nav--main">
+            <nav class="c-nav">
+              <ul class="o-list c-nav__list">
+                <li class="c-nav__item"><a href="/home.html" class="c-nav__link c-nav__link--meta">Dashboard</a></li>
+                <li class="c-nav__item"><a href="/history.html" class="c-nav__link c-nav__link--meta">History</a></li>
+                <li class="c-nav__item"><a href="/settings.html" class="c-nav__link c-nav__link--meta">Settings</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="o-row o-row--lg u-pt-clear">
+        <div class="o-container">
+          <div class="o-section o-section--lg o-widget o-widget--date o-widget__color">
+            <div class="o-layout o-layout--gutter-lg">
+              <h1 class="c-lead--date u-color-primary-base" id="js-date">
+                <!---15:00-->
+                <!---Thursday 27 May 2021-->
+              </h1>
+            </div>
+          </div>
+          <div class="o-section o-section--lg">
+            <div class="o-layout o-layout--gutter-lg">
+              <div class="o-layout__item u-1-of-2-bp3 o-widget">
+                <div class="u-fixed-width-sm">
+                  <h1 class="c-lead c-lead--xl u-color-primary-base">
+                    LAST TIME FED
+                  </h1>
+                </div>
+                <div class="u-fixed-width-sm">
+                  <h1 class="c-lead c-lead--xl c-lead--txt u-color-primary-base" id="js-feedtime">
+                    <!---14:15 -->
+                  </h1>
+                </div>
+              </div>
+              <div class="o-layout__item u-1-of-2-bp3 o-widget">
+                <div class="u-fixed-width-sm">
+                  <h1 class="c-lead c-lead--xl u-color-primary-base">
+                      TIMES FED TODAY
+                  </h1>
+                </div>
+                <div class="u-fixed-width-sm">
+                  <h1 id="js-feedtimetoday" class="c-lead c-lead--xl c-lead--txt u-color-primary-base">
+                    <!---5 -->
+                  </h1>
+                </div>
+              </div>
+              <div id="js-foodmeter" class="o-layout__item u-1-of-2-bp3 o-widget o-layout__container">
+                <div class="u-fixed-width-sm u-fixed-width-xs o-layout__meter o-layout__layer1">
+                  <!---->
+                </div>
+                <!--<div class="o-layout__meter o-layout__layer2 o-layout__layer50">
+
+                </div>-->
+              </div>
+            </div>
+          </div>
+          <div class="o-section o-section--lg">
+            <div class="o-layout o-layout--gutter-lg">
+              <div class="o-layout__item u-1-of-2-bp3 o-widget">
+                <div class="u-fixed-width-sm">
+                  <h1 class="c-lead c-lead--xl u-color-primary-base">
+                    FEED PET
+                  </h1>
+                </div>
+                <div class="u-fixed-width-sm u-fixed-width-xs">
+                  <div id="js-btn" class="js-feedbtn">
+                    <button class="o-layout__button u-color-primary-base">
+                      FEED
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="o-layout__item u-1-of-2-bp3 o-widget">
+                <div class="u-fixed-width-sm">
+                    <h1 class="c-lead c-lead--xl u-color-primary-base">
+                        AUTO FEED
+                    </h1>
+                </div>
+                <div class="u-fixed-width-sm u-fixed-width-xs">
+                  <div id="js-autobtn">
+                    <button class=" o-layout__button o-layout__buttonred u-color-primary-base">
+                      OFF
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+  </body>
+</html>
