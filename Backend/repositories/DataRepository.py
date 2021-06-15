@@ -36,7 +36,7 @@ class DataRepository:
     
     @staticmethod
     def read_Motor_by_id(id):
-        sql = "SELECT * FROM smartpetfeederdb.historiek where DeviceID = 4 and id = %s"
+        sql = "SELECT * FROM historiek where DeviceID = 4 and id = %s"
         params = [id]
         return Database.get_one_row(sql, params)
     
@@ -54,7 +54,7 @@ class DataRepository:
     
     @staticmethod
     def read_PIR_by_id(id):
-        sql = "SELECT * FROM smartpetfeederdb.historiek where DeviceID = 2 and id = %s"
+        sql = "SELECT * FROM historiek where DeviceID = 2 and id = %s"
         params = [id]
         return Database.get_one_row(sql, params)
 
@@ -71,7 +71,7 @@ class DataRepository:
         return Database.get_rows(sql)
     
     def read_HX711_by_id(id):
-        sql = "SELECT * FROM smartpetfeederdb.historiek where DeviceID = 3 and id = %s"
+        sql = "SELECT * FROM historiek where DeviceID = 3 and id = %s"
         params = [id]
         return Database.get_one_row(sql, params)
     
@@ -90,4 +90,4 @@ class DataRepository:
     @staticmethod
     def reset_History():
         sql = "DELETE FROM historiek"
-        return Database.get_rows(sql)
+        return Database.execute_sql(sql)

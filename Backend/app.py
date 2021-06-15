@@ -235,11 +235,19 @@ def status():
     global old_status_LDR
 
     while True:
+
         global HoursMinutesNow
         HoursMinutesNow = str(datetime.datetime.now().strftime("%H:%M"))
 
+        dag = datetime.datetime.today().weekday()
+
+        if (dag == 0) and HoursMinutesNow =='12:00':
+            print("reset historiek")
+            DataRepository.reset_History()
+
         send_message(str(ip1), LCD_LINE1)
-        send_message(str(ip2), LCD_LINE2)
+        send_message("", LCD_LINE2)
+        #send_message(str(ip2), LCD_LINE2)
 
         global everyday
         global timeofday
@@ -268,14 +276,14 @@ def status():
             leds.fill((0, 0, 0))
 
         #print(f"LDR wordt veranderd naar {new_status}")
-
+        
         date = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
         try:
             if old_status_LDR != new_status:
-                if (new_status >= (old_status_LDR + 400)) or (new_status <= (old_status_LDR + 400)):
+                if (new_status >= (old_status_LDR + 400)) or (new_status <= (old_status_LDR - 400)):
                     # Stel de status in op de DB
-                    #res = DataRepository.add_LDR(date, new_status)
+                    DataRepository.add_LDR(date, new_status)
                     old_status_LDR = new_status
                     #print(f"old status: {old_status_LDR}")
         except:
@@ -324,7 +332,7 @@ def Change_LDR_Value():
     
     date = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
-    print(f"LDR wordt veranderd naar {new_status}")
+    #print(f"LDR wordt veranderd naar {new_status}")
 
     # Stel de status in op de DB
     #res = DataRepository.add_LDR(date, new_status)
@@ -340,14 +348,14 @@ def Change_motor_Value():
     #print(date)
 
     # Stel de status in op de DB
-    #res = DataRepository.add_Motor(date)
+    DataRepository.add_Motor(date)
     socketio.emit('B2F_verandering_Motor', {'Motor': date}, broadcast=True)
 
 @socketio.on('F2B_change_PIR_Value')
 def Change_PIR_Value():
     # Ophalen van de data
     new_status = GPIO.input(PIR)
-    print(f"status PIR: {new_status}")
+    #print(f"status PIR: {new_status}")
 
     if new_status == 1:
 
@@ -355,7 +363,7 @@ def Change_PIR_Value():
         #print(date)
 
         # Stel de status in op de DB
-        #res = DataRepository.add_PIR(date, new_status)
+        DataRepository.add_PIR(date, new_status)
 
         socketio.emit('B2F_verandering_PIR', {'PIR': new_status}, broadcast=True)
 
@@ -364,12 +372,12 @@ def Change_HX711_Value():
     # Ophalen van de data
     d = hxx.get_weight()
     new_status = d
-    print(f"status HX711: {new_status[0]}")
+    #print(f"status HX711: {new_status[0]}")
 
     date = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     # Stel de status in op de DB
-    #res = DataRepository.add_HX711(date, new_status[0])
+    # DataRepository.add_HX711(date, new_status[0])
 
     socketio.emit('B2F_verandering_HX711', {'HX711': new_status[0]}, broadcast=True)
 
@@ -388,7 +396,7 @@ def Autofeed(jsonObject):
     global everyday
     timeofday = jsonObject['timeofday']
     everyday = jsonObject['everyday']
-    print(jsonObject)
+    #print(jsonObject)
 
 if __name__ == '__main__':
     try:
